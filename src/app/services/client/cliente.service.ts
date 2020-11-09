@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Cliente} from '../../models/cliente';
 import {of, Observable} from 'rxjs';
+import {map, catchError } from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
@@ -26,7 +27,7 @@ export class ClienteService {
   }
 
   getCliente(id): Observable<Cliente>{
-    return this.http.get<Cliente>(`${this.urlEndPoint}/${id}`);
+    return this.http.get<Cliente>(`${this.urlEndPoint}/${id}`);    
   }
 
   update(cliente:Cliente): Observable<Cliente>{
