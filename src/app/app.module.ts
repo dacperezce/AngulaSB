@@ -11,15 +11,20 @@ import { ClienteService } from './services/client/cliente.service';
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import { FormComponent } from './pages/formClient/form.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ItemsComponent } from './pages/items/items.component';
+import { ItemFormComponent } from './pages/item-form/item-form.component';
 
 const routes: Routes =[
   {path: '', redirectTo: '/clientes', pathMatch: 'full'},
   {path: 'directivas', component: DirectivaComponent},
   {path: 'clientes', component: ClientesComponent},
   {path: 'clientes/form', component: FormComponent},
-  {path: 'clientes/form/:id', component: FormComponent}
+  {path: 'clientes/form/:id', component: FormComponent},
+  {path: 'items', component: ItemsComponent},
+  {path: 'items/form', component: ItemFormComponent},
+  {path: 'items/form/:id', component: ItemFormComponent}
 ];
 
 @NgModule({
@@ -29,9 +34,12 @@ const routes: Routes =[
     FooterComponent,
     HeaderComponent,
     ClientesComponent,
-    FormComponent
+    FormComponent,
+    ItemsComponent,
+    ItemFormComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
