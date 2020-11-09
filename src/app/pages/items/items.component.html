@@ -1,0 +1,35 @@
+<div class="card border-primary mb-3">
+    <div class="card-header">Items</div>
+    <div class="card-body text-primary">
+        <h5 class="card-title">Listado de items</h5>
+        <div class="my-2 text-left">
+            <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/items/form']">Crear Item</button>
+        </div>
+    
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>nombre</th>
+                    <th>estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of items">
+                    <td>{{item.itemName}}</td>
+                    <td>{{item.state}}</td>
+                    <td>
+                        <button type="button" name="editar" [routerLink]="['/items/form', item.itemId]" class="btn btn-primary"> 
+                            editar
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" name="eliminar"  class="btn btn-danger" (click)="delete(item)"> 
+                            eliminar
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+  </div>
