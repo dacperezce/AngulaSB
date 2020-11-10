@@ -15,7 +15,6 @@ export class InterceptorHttpService implements HttpInterceptor{
 
     const token = (localStorage.getItem("accessToken")) ? localStorage.getItem("accessToken") : null;
 
-    debugger
     if (token && req.url.includes('bearer/')) {
       auth = 'Bearer ' + token;
       content = 'application/json';
