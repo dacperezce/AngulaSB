@@ -25,7 +25,11 @@ export class ItemFormComponent implements OnInit {
     ) { 
       this.activatedRoute.params.subscribe(params => {
         let id = params['id'];
+
+        const state = (params["state"] === "false") ? false : true;
+        
         if(id){
+          this.item = new Item(params['id'], params["itemName"], state)
           this.itemService.getItem(id).subscribe(
             item => this.item = item
           );
@@ -45,28 +49,30 @@ export class ItemFormComponent implements OnInit {
   initForm() {
     this.itemForm = this.fb.group({
       name: [
-        this.item.itemName
+        (this.item) ? this.item.itemName : ""
       ],
       state: [
-        this.item.state
+        (this.item) ? this.item.state : false
       ],
     });
   }
 
   public create(): void{
-    this.itemService.create(this.item).subscribe(
+    const itemNew = new Item("", this.f.name.value, this.f.state.value);
+    this.itemService.create(itemNew).subscribe(
       item => {
         this.router.navigate(['items']);
-        swal.fire('Nuevo item',`item ${item.itemName} creado con éxito`, 'success');
+        swal.fire('Nuevo item',`item ${itemNew.itemName} creado con éxito`, 'success');
       }
     )
   }
 
   public update(): void{
+    this.item = new Item(this.item.itemId, this.f.name.value, this.f.state.value);
     this.itemService.update(this.item).subscribe(
       item => {
         this.router.navigate(['/items']);
-        swal.fire('item actualizado', `item ${item.itemName} actualizado con exito`, 'success');
+        swal.fire('item actualizado', `item ${this.item.itemName} actualizado con exito`, 'success');
       }
     );
   }

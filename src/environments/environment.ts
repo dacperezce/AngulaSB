@@ -3,11 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 const SB_URL = 'http://localhost:8090/jdbcTemp/api';
+const SB_USER_URL = 'http://localhost:8080/api';
 
 export const environment = {
   production: false,
 
-  ITEM: SB_URL + "/item/",
+  ITEM: "token/" + SB_URL + "/item/",
+  USER: SB_USER_URL + "/clientes/",
+  LOGIN: SB_URL + "/auth/authenticate"
 };
 
 /*

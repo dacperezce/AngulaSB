@@ -9,22 +9,25 @@ import { HeaderComponent } from './header/header.component';
 import { ClientesComponent } from './pages/client/clientes.component';
 import { ClienteService } from './services/client/cliente.service';
 import {RouterModule, Routes} from '@angular/router';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { FormComponent } from './pages/formClient/form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ItemsComponent } from './pages/items/items.component';
 import { ItemFormComponent } from './pages/item-form/item-form.component';
+import { LoginComponent } from './pages/login/login.component';
+import { InterceptorHttpService } from './services/interceptor/interceptor-http.service';
 
 const routes: Routes =[
-  {path: '', redirectTo: '/clientes', pathMatch: 'full'},
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'directivas', component: DirectivaComponent},
   {path: 'clientes', component: ClientesComponent},
   {path: 'clientes/form', component: FormComponent},
   {path: 'clientes/form/:id', component: FormComponent},
   {path: 'items', component: ItemsComponent},
   {path: 'items/form', component: ItemFormComponent},
-  {path: 'items/form/:id', component: ItemFormComponent}
+  {path: 'items/form/:id/:itemName/:state', component: ItemFormComponent},
+  {path: 'login', component: LoginComponent}
 ];
 
 @NgModule({
@@ -36,7 +39,8 @@ const routes: Routes =[
     ClientesComponent,
     FormComponent,
     ItemsComponent,
-    ItemFormComponent
+    ItemFormComponent,
+    LoginComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -47,7 +51,13 @@ const routes: Routes =[
     RouterModule.forRoot(routes)
   ],
   providers: [
-    ClienteService
+    ClienteService,
+    ,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorHttpService,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })
