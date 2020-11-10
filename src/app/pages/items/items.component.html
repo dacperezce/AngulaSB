@@ -18,7 +18,7 @@
                     <td>{{item.itemName}}</td>
                     <td>{{item.state}}</td>
                     <td>
-                        <button type="button" name="editar" [routerLink]="['/items/form', item.itemId]" class="btn btn-primary"> 
+                        <button type="button" name="editar" [routerLink]="['/items/form', item.itemId, item.itemName, item.state]" class="btn btn-primary"> 
                             editar
                         </button>
                     </td>
